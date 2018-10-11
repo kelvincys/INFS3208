@@ -1,0 +1,52 @@
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0,0,0,0.4)), url('../image/cover.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+}
+
+.des {
+	font-family: 'Cookie', cursive;
+}
+
+.middle {
+	padding-top: 15%;
+	color: white;
+}
+
+p{
+	font-size: 98px;
+}
+
+.box {
+  position: relative;
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  transition: 0.5s;
+  padding: 0 20px;
+  cursor: pointer;
+  border: 2px solid #FFF;
+  -webkit-transition: 0.5s;
+  text-decoration: none;
+  transition all 0.2s ease-in-out;
+}
+
+.box:hover {
+  border: 2px solid rgba(255, 255, 255);
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, .6);
+}
+
+
+
+#none {
+	color:#FFF;
+	text-decoration: none;
+	font-weight: bold;
+}
