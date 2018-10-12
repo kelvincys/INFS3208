@@ -40,6 +40,40 @@
 
 
       <!-- Blog Post -->
+      <?php
+        $cluster = Cassandra::cluster()
+        ->withContactPoints('172.23.99.170','172.23.106.82','172.23.104.206')
+        ->withPort(9042)
+        ->build();
+
+        $keySpace ="cloudcomputing";
+        $session = $cluster->connect($keyspace);
+        $staement = new Cassandra\SimpleStatement(
+          "SELECT * FROM data"
+        );
+        $future = $session->executeAsync($statement);
+        $result = $future->get();
+        foreach ($$result as $row) {
+          echo"<div class='card mb-4 border border-dark'>";
+          echo "<div class='card-body'>";
+          echo "<div class='row'>";
+          echo "<div class='col-lg-6'>";
+          $str = implode("|",$row);
+          $array = explode("|", $str);
+          echo "<img class='img-fluid rounded' src='".$array[5]."' alt=''>";
+          echo "<div class='col-lg-6'>";
+          echo "<h2 class='card-title'>".$array[1]."</h2>";
+          echo "<p class='card-text'>";
+          echo $array[3];
+          echo "</p>";
+          echo " </div></div></div>";
+          echo "<div class='card-footer text-muted'>";
+          echo "Posted on database time by".$array[2];
+          echo "</div></div>";
+        }
+      ?>
+
+
       <div class="card mb-4 border border-dark">
         <div class="card-body">
           <div class="row">
