@@ -46,29 +46,30 @@
         ->withPort(9042)
         ->build();
 
-        $keySpace ="cloudcomputing";
+        $keyspace ="cloudcomputing";
         $session = $cluster->connect($keyspace);
-        $staement = new Cassandra\SimpleStatement(
+        $statement = new Cassandra\SimpleStatement(
           "SELECT * FROM data"
         );
         $future = $session->executeAsync($statement);
         $result = $future->get();
-        foreach ($$result as $row) {
+        foreach ($result as $row) {
           echo"<div class='card mb-4 border border-dark'>";
           echo "<div class='card-body'>";
           echo "<div class='row'>";
-          echo "<div class='col-lg-6'>";
+          echo "<div class='col-lg-3'>";
           $str = implode("|",$row);
           $array = explode("|", $str);
-          echo "<img class='img-fluid rounded' src='".$array[5]."' alt=''>";
-          echo "<div class='col-lg-6'>";
+          $date = $array[0]/1000;
+          echo "<img class='img-fluid rounded' src='".$array[4]."' alt=''>";
+          echo "</div><div class='col-lg-9'>";
           echo "<h2 class='card-title'>".$array[1]."</h2>";
           echo "<p class='card-text'>";
           echo $array[3];
           echo "</p>";
-          echo " </div></div></div>";
+          echo "</div></div></div>";
           echo "<div class='card-footer text-muted'>";
-          echo "Posted on database time by".$array[2];
+          echo "Posted on " . date("Y-m-d", $date) . " by " . $array[2] . ".";
           echo "</div></div>";
         }
       ?>
